@@ -51,9 +51,22 @@
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>6.1.19</spring.version>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.java.checkstyle.reportPaths>${project.build.directory}/checkstyle-result.xml
+        </sonar.java.checkstyle.reportPaths>
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.java.source>17</sonar.java.source>
+        <sonar.java.target>17</sonar.java.target>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco-ut/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.language>java</sonar.language>
         <checkstyle.config.location>${project.basedir}/checkstyle.xml</checkstyle.config.location>
         <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec
         </jacoco.ut.execution.data.file>
+        <sonar.coverage.exclusions>
+            src/main/java/org/eclipse/ecsp/utils/logger/IgniteCallerDataConverter.java,
+            src/main/java/org/eclipse/ecsp/utils/logger/IgniteThrowableProxyConverter.java
+        </sonar.coverage.exclusions>
     </properties>
 
     <distributionManagement>
