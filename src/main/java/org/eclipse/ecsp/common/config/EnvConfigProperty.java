@@ -15,7 +15,9 @@
  *
  * <p>SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
+
 package org.eclipse.ecsp.common.config;
+
 /**
  * Represents a configuration property that can be defined in an environment configuration file.
  * This interface provides methods to retrieve the name of the property as it appears in the file,

@@ -15,7 +15,9 @@
  *
  * <p>SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
+
 package org.eclipse.ecsp.common.config;
+
 /**
  * The {@code EnvConfigPropertyValueProcessor} interface defines a contract for processing
  * configuration property values. Implementations of this interface are responsible for

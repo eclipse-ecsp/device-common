@@ -1,4 +1,3 @@
-package org.eclipse.ecsp.common.build;
 /********************************************************************************
  * Copyright (c) 2023-24 Harman International
  *
@@ -16,6 +15,9 @@ package org.eclipse.ecsp.common.build;
  *
  * <p>SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
+
+package org.eclipse.ecsp.common.build;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

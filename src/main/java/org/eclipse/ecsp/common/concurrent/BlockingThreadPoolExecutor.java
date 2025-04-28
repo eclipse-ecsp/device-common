@@ -1,4 +1,3 @@
-package org.eclipse.ecsp.common.concurrent;
 /********************************************************************************
  * Copyright (c) 2023-24 Harman International
  *
@@ -16,6 +15,9 @@ package org.eclipse.ecsp.common.concurrent;
  *
  * <p>SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
+
+package org.eclipse.ecsp.common.concurrent;
+
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.SynchronousQueue;
