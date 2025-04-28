@@ -63,10 +63,6 @@
         <checkstyle.config.location>${project.basedir}/checkstyle.xml</checkstyle.config.location>
         <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec
         </jacoco.ut.execution.data.file>
-        <sonar.coverage.exclusions>
-            src/main/java/org/eclipse/ecsp/utils/logger/IgniteCallerDataConverter.java,
-            src/main/java/org/eclipse/ecsp/utils/logger/IgniteThrowableProxyConverter.java
-        </sonar.coverage.exclusions>
     </properties>
 
     <distributionManagement>

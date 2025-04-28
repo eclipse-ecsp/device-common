@@ -67,8 +67,8 @@ jobs:
 
       - name: Copy License information
         run: |
-          mkdir -p utils/src/main/resources/META-INF/
-          cp LICENSE NOTICE.md DEPENDENCIES SECURITY.md utils/src/main/resources/META-INF/
+          mkdir -p device-common/src/main/resources/META-INF/
+          cp LICENSE NOTICE.md DEPENDENCIES SECURITY.md device-common/src/main/resources/META-INF/
 
       - name: Publish version
         run: |-
