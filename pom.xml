@@ -79,7 +79,7 @@
      <pluginRepositories>
         <pluginRepository>
             <id>dash-licenses-releases</id>
-            <url>https://repo.eclipse.org/content/repositories/dash-licenses-releases/org/eclipse/dash/dash-licenses-parent/</url>
+            <url>https://repo.eclipse.org/content/repositories/dash-licenses-releases/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
