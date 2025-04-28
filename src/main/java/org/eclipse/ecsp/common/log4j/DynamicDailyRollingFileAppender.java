@@ -1,4 +1,3 @@
-package org.eclipse.ecsp.common.log4j;
 /********************************************************************************
  * Copyright (c) 2023-24 Harman International
  *
@@ -16,6 +15,9 @@ package org.eclipse.ecsp.common.log4j;
  *
  * <p>SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
+
+package org.eclipse.ecsp.common.log4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Appender;
 import org.apache.log4j.DailyRollingFileAppender;
