@@ -247,106 +247,213 @@ public class DynamicDailyRollingFileAppender implements Appender, OptionHandler 
         return defaultAppender.getErrorHandler();
     }
 
+    /**
+     * Sets the layout for the default appender.
+     *
+     * @param layout the layout to be set for the default appender. This defines
+     *               the format in which log messages will be written.
+     */
     @Override
     public void setLayout(Layout layout) {
         defaultAppender.setLayout(layout);
     }
 
+    /**
+     * Retrieves the layout associated with the default appender.
+     *
+     * @return the {@link Layout} instance used by the default appender.
+     */
     @Override
     public Layout getLayout() {
         return defaultAppender.getLayout();
     }
 
+    /**
+     * Sets the name of the appender.
+     *
+     * @param name the name to set for the appender
+     */
     @Override
     public void setName(String name) {
         defaultAppender.setName(name);
     }
 
+    /**
+     * Retrieves the name of the default appender.
+     *
+     * @return the name of the default appender as a {@code String}.
+     */
     @Override
     public String getName() {
         return defaultAppender.getName();
     }
 
+    /**
+     * Indicates whether a layout is required for this appender.
+     *
+     * @return {@code true} if a layout is required, {@code false} otherwise.
+     */
     @Override
     public boolean requiresLayout() {
         return defaultAppender.requiresLayout();
     }
 
-    // ####################################################
-    // DailyRollingFileAppender
-    // ####################################################
-
+    
+    /**
+     * Sets the date pattern for the default appender.
+     * The date pattern determines the naming convention for the log files
+     * based on the date and time.
+     *
+     * @param pattern the date pattern to be used, typically in a format
+     *                such as "'.'yyyy-MM-dd" or similar.
+     */
     public void setDatePattern(String pattern) {
         defaultAppender.setDatePattern(pattern);
     }
 
+    /**
+     * Retrieves the date pattern used by the default appender.
+     *
+     * @return the date pattern as a {@code String}.
+     */
     public String getDatePattern() {
         return defaultAppender.getDatePattern();
     }
 
-    // ####################################################
-    // FileAppender
-    // ####################################################
+    /**
+     * Sets the file path for the default appender.
+     *
+     * @param file the path of the file to which the logs will be written.
+     */
     public void setFile(String file) {
         defaultAppender.setFile(file);
     }
 
+    /**
+     * Retrieves the file path of the log file currently being used by the default appender.
+     *
+     * @return The file path of the log file as a {@code String}.
+     */
     public String getFile() {
         return defaultAppender.getFile();
     }
 
+    /**
+     * Sets whether the appender should append to the existing file or overwrite it.
+     *
+     * @param flag {@code true} to enable appending to the file, 
+     *             {@code false} to overwrite the file.
+     */
     public void setAppend(boolean flag) {
         defaultAppender.setAppend(flag);
     }
 
+    /**
+     * Retrieves the current append mode of the default appender.
+     *
+     * @return {@code true} if the appender is in append mode, 
+     *         {@code false} otherwise.
+     */
     public boolean getAppend() {
         return defaultAppender.getAppend();
     }
 
+    /**
+     * Sets whether buffered IO is enabled for the appender.
+     *
+     * @param bufferedIo {@code true} to enable buffered IO, {@code false} to disable it.
+     */
     public void setBufferedIo(boolean bufferedIo) {
         defaultAppender.setBufferedIO(bufferedIo);
     }
 
+    /**
+     * Retrieves the buffered IO setting of the default appender.
+     *
+     * @return {@code true} if buffered IO is enabled; {@code false} otherwise.
+     */
     public boolean getBufferedIo() {
         return defaultAppender.getBufferedIO();
     }
 
+    /**
+     * Sets the buffer size for the default appender.
+     *
+     * @param bufferSize the size of the buffer to be set, in bytes.
+     */
     public void setBufferSize(int bufferSize) {
         defaultAppender.setBufferSize(bufferSize);
     }
 
+    /**
+     * Retrieves the buffer size used by the default appender.
+     *
+     * @return the buffer size in bytes.
+     */
     public int getBufferSize() {
         return defaultAppender.getBufferSize();
     }
 
-    // ####################################################
-    // WriterAppender
-    // ####################################################
-
+    /**
+     * Sets whether the appender should immediately flush the output stream
+     * after each log event. When set to {@code true}, the appender will flush
+     * the stream immediately, ensuring that log events are written to the
+     * destination without delay. When set to {@code false}, the appender may
+     * buffer log events for performance reasons.
+     *
+     * @param value {@code true} to enable immediate flushing, {@code false} to disable it.
+     */
     public void setImmediateFlush(boolean value) {
         defaultAppender.setImmediateFlush(value);
     }
 
+    /**
+     * Retrieves the immediate flush setting of the default appender.
+     *
+     * @return {@code true} if the appender is configured to flush output immediately 
+     *         after each write operation, {@code false} otherwise.
+     */
     public boolean getImmediateFlush() {
         return defaultAppender.getImmediateFlush();
     }
 
+    /**
+     * Sets the character encoding for the appender.
+     *
+     * @param value the name of the character encoding to set. 
+     *              For example, "UTF-8" or "ISO-8859-1".
+     */
     public void setEncoding(String value) {
         defaultAppender.setEncoding(value);
     }
 
+    /**
+     * Retrieves the character encoding used by the default appender.
+     *
+     * @return the encoding as a {@link String}, or {@code null} if no encoding is set.
+     */
     public String getEncoding() {
         return defaultAppender.getEncoding();
     }
 
-    // ####################################################
-    // Appender Skeleton
-    // ####################################################
-
+    /**
+     * Sets the threshold level for logging. Log events with a level lower than 
+     * the specified threshold will not be logged by this appender.
+     *
+     * @param threshold the logging threshold to set. This determines the minimum 
+     *                  priority level of log events that will be processed.
+     */
     public void setThreshold(Priority threshold) {
         defaultAppender.setThreshold(threshold);
     }
 
+    /**
+     * Retrieves the logging threshold level for the appender.
+     * The threshold determines the minimum priority level of log messages
+     * that will be logged by this appender.
+     *
+     * @return the current logging threshold as a {@link Priority} object.
+     */
     public Priority getThreshold() {
         return defaultAppender.getThreshold();
     }

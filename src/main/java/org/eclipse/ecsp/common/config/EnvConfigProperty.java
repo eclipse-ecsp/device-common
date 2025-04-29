@@ -24,9 +24,25 @@ package org.eclipse.ecsp.common.config;
  * its default value, and its type.
  */
 public interface EnvConfigProperty {
+    /**
+     * Retrieves the name of the property as it appears in the configuration file.
+     *
+     * @return the name of the property in the configuration file.
+     */
     String getNameInFile();
 
+
+    /**
+     * Retrieves the default value associated with this configuration property.
+     *
+     * @return the default value as a {@code String}, or {@code null} if no default value is set.
+     */
     String getDefaultValue();
 
+    /**
+     * Retrieves the type of the environment configuration property.
+     *
+     * @return the {@link EnvConfigPropertyType} representing the type of the property.
+     */
     EnvConfigPropertyType getType();
 }

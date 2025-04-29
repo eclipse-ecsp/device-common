@@ -41,15 +41,37 @@ package org.eclipse.ecsp.common.config;
  */
 
 public class EnvConfigLocation {
+    /**
+     * Constant representing the classpath location prefix.
+     * This is typically used to specify resources that are located
+     * within the application's classpath.
+     */
     public static final String CLASSPATH = "classpath";
+
+
+    /**
+     * Singleton instance of the {@code EnvConfigLocation} class.
+     * This instance provides a centralized access point for environment
+     * configuration location settings.
+     */
     public static final EnvConfigLocation INSTANCE = new EnvConfigLocation();
 
     private String path = CLASSPATH;
 
+    /**
+     * Retrieves the path associated with this configuration.
+     *
+     * @return the path as a {@code String}.
+     */
     public String getPath() {
         return path;
     }
 
+    /**
+     * Sets the path for the configuration.
+     *
+     * @param path the path to be set
+     */
     public void setPath(String path) {
         this.path = path;
     }
