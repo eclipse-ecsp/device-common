@@ -79,7 +79,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
     private static final String GLOBAL_CONFIG_FILE_NAME = ".properties";
     private static final String APP_CONFIG_FILE_NAME = "-app.properties";
     private static final String TEST_CONFIG_FILE_NAME = "-test.properties";
-    private static String FILE_SEPARATOR = System.getProperty("file.separator");
+    private static String fileSeparator = System.getProperty("file.separator");
 
     private final EnvConfig<T> config;
 
@@ -121,7 +121,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
             throw new RuntimeException("File name prefix must not be empty. Current value '" + fileNamePrefix + "'.");
         }
         this.propertyClass = propertyClass;
-        this.config = new EnvConfig<T>(propertyClass);
+        this.config = new EnvConfig<>(propertyClass);
         reload();
 
     }
@@ -164,11 +164,11 @@ public class EnvConfigLoader<T extends Enum<T>> {
      */
     private void overrideWithEnvironmentVariables(Properties properties) {
         Map<String, String> environmentMap = System.getenv();
-        log.info("System properties: " + environmentMap);
+        log.info("System properties: {}", environmentMap);
 
         for (String key : environmentMap.keySet()) {
             if (properties.containsKey(key)) {
-                log.info("Overriding with system property" + key + " : " + environmentMap.get(key));
+                log.info("Overriding with system property {} : {}", key, environmentMap.get(key));
                 properties.put(key, environmentMap.get(key));
             }
         }
@@ -235,7 +235,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
     private Properties normalize(Properties globalProps) {
 
         Properties result = new Properties();
-        HashSet<String> propsNameInFile = new HashSet<String>();
+        HashSet<String> propsNameInFile = new HashSet<>();
 
         T[] propertyEnums = propertyClass.getEnumConstants();
         for (T propertyEnum : propertyEnums) {
@@ -249,7 +249,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
 
             if (!propsNameInFile.contains(key)) {
                 log.error(
-                        "Property with the name \"" + key + "\" is not registered as AhaProperty. It will be ignored.");
+                        "Property with the name {} is not registered as AhaProperty. It will be ignored.", key);
                 continue;
             }
 
@@ -258,7 +258,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
                 value = valueProcessor.processValue(key, value);
             }
             if (log.isDebugEnabled()) {
-                log.debug(" adding property " + key + "=" + value);
+                log.debug(" adding property {} = {}", key, value);
             }
             result.put(key, value);
         }
@@ -287,9 +287,10 @@ public class EnvConfigLoader<T extends Enum<T>> {
     private Properties loadFileWithProperties(String path, String fileName, boolean mustExist) {
         Properties props = new Properties();
 
-        InputStream istream = null;
-        try {
-            log.warn("Looking for path:" + path + " file:" + fileName);
+        try (InputStream istream = "classpath".equalsIgnoreCase(path) 
+                ? Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName) 
+                : new FileInputStream(new File(path + fileSeparator + fileName))) {
+            log.warn("Looking for path:{} and file:{}", path, fileName);
             if (log.isDebugEnabled()) {
                 log.debug(
                         "YOU CAN IGNORE THIS EXCEPTION: the purpose of this exception is to trace invocation"
@@ -300,39 +301,29 @@ public class EnvConfigLoader<T extends Enum<T>> {
 
             if ("classpath".equalsIgnoreCase(path)) {
                 propertiesPath = fileName;
-                istream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
                 if (istream == null) {
                     if (mustExist) {
-                        log.error("Cannot find file with configuration properties in the classpath:" + fileName);
+                        log.error("Cannot find file with configuration properties in the classpath:{}", fileName);
                         throw new FileNotFoundException(fileName);
                     }
                     return props;
                 }
             } else {
-                File file = new File(path + FILE_SEPARATOR + fileName);
+                File file = new File(path + fileSeparator + fileName);
                 propertiesPath = file.toString();
                 if (!file.exists()) {
                     if (mustExist) {
-                        log.error("Cannot find file with configuration properties:" + propertiesPath);
+                        log.error("Cannot find file with configuration properties:{}", propertiesPath);
                         throw new FileNotFoundException(file.toString());
                     }
                     return props;
                 }
-                istream = new FileInputStream(file);
             }
-            log.warn("FILE FOUND loading: " + propertiesPath);
+            log.warn("FILE FOUND loading: {}", propertiesPath);
             props.load(istream);
             return props;
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            if (istream != null) {
-                try {
-                    istream.close();
-                } catch (Exception ignore) {
-                    // do nothing
-                }
-            }
         }
     }
 }
