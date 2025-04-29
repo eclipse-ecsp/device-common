@@ -38,15 +38,13 @@ import java.util.TreeMap;
  * property name in the configuration file and its default value.
  * </p>
  *
- * <p>
- * Key features of this class include:
+ * <p>Key features of this class include:
  * <ul>
  *   <li>Retrieving property values as {@code String}, {@code Boolean}, {@code Long}, 
  *       or {@code Integer} types.</li>
  *   <li>Obfuscating secured property values for display purposes.</li>
  *   <li>Generating a map of property names and their corresponding display values.</li>
  * </ul>
- * </p>
  *
  * @param <T> the type of the enum representing the configuration properties. 
  *            The enum must extend {@link Enum} and implement {@link EnvConfigProperty}.
@@ -59,14 +57,30 @@ public class EnvConfig<T extends Enum<T>> {
     private Properties properties;
     private static final int TWO = 2;
 
+    /**
+     * Constructs an instance of {@code EnvConfig} with the specified enum class.
+     *
+     * @param enumClass the {@code Class} object of the enum type to be used for configuration
+     */
     public EnvConfig(Class<T> enumClass) {
         this.enumClass = enumClass;
     }
 
+    /**
+     * Sets the global properties for the environment configuration.
+     *
+     * @param globalProps the {@link Properties} object containing the global
+     *                    configuration properties to be set.
+     */
     void setProperties(Properties globalProps) {
         this.properties = globalProps;
     }
 
+    /**
+     * Retrieves all the enum constants of the specified enum class.
+     *
+     * @return An array of enum constants of type {@code T}, or {@code null} if the enum class has no constants.
+     */
     public T[] getPropertyEnums() {
         return enumClass.getEnumConstants();
     }

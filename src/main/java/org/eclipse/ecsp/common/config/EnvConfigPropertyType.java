@@ -29,5 +29,8 @@ package org.eclipse.ecsp.common.config;
  * </ul>
  */
 public enum EnvConfigPropertyType {
+    /**
+     * PUBLIC, SECURED.
+     */
     PUBLIC, SECURED
 }

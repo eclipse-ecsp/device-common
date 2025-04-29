@@ -69,6 +69,17 @@ public class BlockingThreadPoolExecutor extends ThreadPoolExecutor {
     private static final int RETRY_COUNT = 2;
     private static final int SLEEP_TIME_MILLIS = 100;
 
+    /**
+     * A custom thread pool executor that blocks when the maximum pool size is reached.
+     * This class extends the ThreadPoolExecutor and uses a semaphore to limit the number
+     * of concurrent threads to the specified maximum pool size.
+     *
+     * @param corePoolSize the number of threads to keep in the pool, even if they are idle.
+     * @param maxPoolSize the maximum number of threads allowed in the pool.
+     * @param keepAliveTime the maximum time that excess idle threads will wait for new tasks
+     *                      before terminating.
+     * @param unit the time unit for the {@code keepAliveTime} argument.
+     */
     public BlockingThreadPoolExecutor(int corePoolSize, int maxPoolSize, long keepAliveTime, TimeUnit unit) {
         super(corePoolSize, maxPoolSize, keepAliveTime, unit, new SynchronousQueue<Runnable>());
         this.semaphore = new Semaphore(maxPoolSize);

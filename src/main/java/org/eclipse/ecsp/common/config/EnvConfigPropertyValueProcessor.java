@@ -37,5 +37,12 @@ package org.eclipse.ecsp.common.config;
  * @see java.util.Properties
  */
 public interface EnvConfigPropertyValueProcessor {
+    /**
+     * Processes the given configuration property value based on the specified key.
+     *
+     * @param key   the key associated with the configuration property
+     * @param value the value of the configuration property to be processed
+     * @return the processed value as a String
+     */
     String processValue(String key, String value);
 }

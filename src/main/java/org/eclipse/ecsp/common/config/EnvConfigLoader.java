@@ -46,15 +46,13 @@ import java.util.Set;
  * through a custom {@code EnvConfigPropertyValueProcessor}.
  * </p>
  *
- * <p>
- * Key features of this class include:
+ * <p>Key features of this class include:
  * <ul>
  *   <li>Loading properties from global, application, and test configuration files.</li>
  *   <li>Overriding properties with environment variables.</li>
  *   <li>Normalizing and validating properties against a predefined set of property names.</li>
  *   <li>Providing a mechanism to reload configuration properties dynamically.</li>
  * </ul>
- * </p>
  *
  * <p>
  * Typical usage involves creating an instance of {@code EnvConfigLoader} with a 
@@ -62,13 +60,11 @@ import java.util.Set;
  * loaded configuration through the {@code getServerConfig()} method.
  * </p>
  *
- * <p>
- * Example:
+ * <p>Example:
  * <pre>{@code
  * EnvConfigLoader<MyPropertyEnum> loader = new EnvConfigLoader<>(MyPropertyEnum.class, "my-app");
  * EnvConfig<MyPropertyEnum> config = loader.getServerConfig();
  * }</pre>
- * </p>
  *
  * @param <T> The type of the property enumeration that extends {@code Enum<T>} 
  *            and implements {@code EnvConfigProperty}.
@@ -87,6 +83,15 @@ public class EnvConfigLoader<T extends Enum<T>> {
     private final String fileNamePrefix;
     private final EnvConfigPropertyValueProcessor valueProcessor;
 
+    /**
+     * Constructs an instance of {@code EnvConfigLoader} with the specified property class
+     * and file name prefix. This constructor delegates to another constructor
+     * with an additional parameter for environment overrides, which is set to {@code null}.
+     *
+     * @param propertyClass  the class type of the properties to be loaded
+     * @param fileNamePrefix the prefix of the file name to be used for loading configuration
+     *                        files
+     */
     public EnvConfigLoader(Class<T> propertyClass, String fileNamePrefix) {
         this(propertyClass, fileNamePrefix, null);
     }

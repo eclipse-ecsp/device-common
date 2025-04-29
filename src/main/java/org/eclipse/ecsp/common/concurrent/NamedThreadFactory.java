@@ -34,6 +34,12 @@ public class NamedThreadFactory implements ThreadFactory {
     private final String namePrefix;
     private final boolean daemon;
 
+    /**
+     * Constructs a new {@code NamedThreadFactory} with the specified factory name.
+     * By default, the threads created by this factory will be daemon threads.
+     *
+     * @param factoryName the name to be used as a prefix for threads created by this factory
+     */
     public NamedThreadFactory(String factoryName) {
         this(factoryName, true);
     }
