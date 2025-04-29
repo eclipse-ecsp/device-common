@@ -2,7 +2,6 @@
 
 [![Build](../../actions/workflows/maven-build.yml/badge.svg)](../../actions/workflows/maven-build.yml)
 [![License Compliance](../../actions/workflows/license-compliance.yml/badge.svg)](../../actions/workflows/license-compliance.yml)
-[![Documentation](../../actions/workflows/documentation.yml/badge.svg)](../../actions/workflows/documentation.yml)
 
 # Device Common Library
 
