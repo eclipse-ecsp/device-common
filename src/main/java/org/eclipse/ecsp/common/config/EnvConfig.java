@@ -38,8 +38,7 @@ import java.util.TreeMap;
  * property name in the configuration file and its default value.
  * </p>
  *
- * <p>
- * Key features of this class include:
+ * <p>Key features of this class include:
  * <ul>
  *   <li>Retrieving property values as {@code String}, {@code Boolean}, {@code Long}, 
  *       or {@code Integer} types.</li>

@@ -46,8 +46,7 @@ import java.util.Set;
  * through a custom {@code EnvConfigPropertyValueProcessor}.
  * </p>
  *
- * <p>
- * Key features of this class include:
+ * <p>Key features of this class include:
  * <ul>
  *   <li>Loading properties from global, application, and test configuration files.</li>
  *   <li>Overriding properties with environment variables.</li>
@@ -61,8 +60,7 @@ import java.util.Set;
  * loaded configuration through the {@code getServerConfig()} method.
  * </p>
  *
- * <p>
- * Example:
+ * <p>Example:
  * <pre>{@code
  * EnvConfigLoader<MyPropertyEnum> loader = new EnvConfigLoader<>(MyPropertyEnum.class, "my-app");
  * EnvConfig<MyPropertyEnum> config = loader.getServerConfig();
