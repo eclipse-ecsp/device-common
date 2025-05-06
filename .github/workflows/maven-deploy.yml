@@ -73,4 +73,4 @@ jobs:
       - name: Publish version
         run: |-
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          mvn clean deploy -s $HOME/.m2/settings.xml -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}" -Prelease -Drevision=$VERSION
+          mvn clean deploy -X -e -s $HOME/.m2/settings.xml -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}" -Prelease -Drevision=$VERSION
