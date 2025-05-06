@@ -32,41 +32,46 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
-
 /**
- * The {@code EnvConfigLoader} class is responsible for loading and managing 
- * configuration properties for an application. It supports loading properties 
- * from multiple sources, including configuration files and environment variables, 
- * and provides mechanisms for normalizing and processing these properties.
+ * The {@code EnvConfigLoader} class is responsible for loading and managing
+ * configuration properties for an application. It supports loading properties
+ * from multiple sources, including configuration files and environment
+ * variables, and provides mechanisms for normalizing and processing these
+ * properties.
  *
  * <p>
- * This class is designed to work with an enumeration of properties that implement 
- * the {@code EnvConfigProperty} interface. It ensures that only registered properties 
- * are loaded and processed, and it provides flexibility for handling property values 
- * through a custom {@code EnvConfigPropertyValueProcessor}.
+ * This class is designed to work with an enumeration of properties that
+ * implement the {@code EnvConfigProperty} interface. It ensures that only
+ * registered properties are loaded and processed, and it provides flexibility
+ * for handling property values through a custom
+ * {@code EnvConfigPropertyValueProcessor}.
  * </p>
  *
  * <p>Key features of this class include:
  * <ul>
- *   <li>Loading properties from global, application, and test configuration files.</li>
- *   <li>Overriding properties with environment variables.</li>
- *   <li>Normalizing and validating properties against a predefined set of property names.</li>
- *   <li>Providing a mechanism to reload configuration properties dynamically.</li>
+ * <li>Loading properties from global, application, and test configuration
+ * files.</li>
+ * <li>Overriding properties with environment variables.</li>
+ * <li>Normalizing and validating properties against a predefined set of
+ * property names.</li>
+ * <li>Providing a mechanism to reload configuration properties
+ * dynamically.</li>
  * </ul>
  *
  * <p>
- * Typical usage involves creating an instance of {@code EnvConfigLoader} with a 
- * specific property enumeration and file name prefix, and then accessing the 
+ * Typical usage involves creating an instance of {@code EnvConfigLoader} with a
+ * specific property enumeration and file name prefix, and then accessing the
  * loaded configuration through the {@code getServerConfig()} method.
  * </p>
  *
  * <p>Example:
+ * 
  * <pre>{@code
  * EnvConfigLoader<MyPropertyEnum> loader = new EnvConfigLoader<>(MyPropertyEnum.class, "my-app");
  * EnvConfig<MyPropertyEnum> config = loader.getServerConfig();
  * }</pre>
  *
- * @param <T> The type of the property enumeration that extends {@code Enum<T>} 
+ * @param <T> The type of the property enumeration that extends {@code Enum<T>}
  *            and implements {@code EnvConfigProperty}.
  */
 public class EnvConfigLoader<T extends Enum<T>> {
@@ -84,13 +89,14 @@ public class EnvConfigLoader<T extends Enum<T>> {
     private final EnvConfigPropertyValueProcessor valueProcessor;
 
     /**
-     * Constructs an instance of {@code EnvConfigLoader} with the specified property class
-     * and file name prefix. This constructor delegates to another constructor
-     * with an additional parameter for environment overrides, which is set to {@code null}.
+     * Constructs an instance of {@code EnvConfigLoader} with the specified property
+     * class and file name prefix. This constructor delegates to another constructor
+     * with an additional parameter for environment overrides, which is set to
+     * {@code null}.
      *
      * @param propertyClass  the class type of the properties to be loaded
-     * @param fileNamePrefix the prefix of the file name to be used for loading configuration
-     *                        files
+     * @param fileNamePrefix the prefix of the file name to be used for loading
+     *                       configuration files
      */
     public EnvConfigLoader(Class<T> propertyClass, String fileNamePrefix) {
         this(propertyClass, fileNamePrefix, null);
@@ -215,7 +221,8 @@ public class EnvConfigLoader<T extends Enum<T>> {
      * on the predefined set of property names and an optional value processor.
      *
      * 
-     * <p>This method performs the following steps:
+     * <p>
+     * This method performs the following steps:
      * </p>
      * <ul>
      * <li>Retrieves the set of property names defined in the enumeration of the
@@ -253,8 +260,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
             String value = (String) entry.getValue();
 
             if (!propsNameInFile.contains(key)) {
-                log.error(
-                        "Property with the name {} is not registered as AhaProperty. It will be ignored.", key);
+                log.error("Property with the name {} is not registered as AhaProperty. It will be ignored.", key);
                 continue;
             }
 
@@ -292,23 +298,23 @@ public class EnvConfigLoader<T extends Enum<T>> {
     private Properties loadFileWithProperties(String path, String fileName, boolean mustExist) {
         Properties props = new Properties();
 
-        try (InputStream istream = "classpath".equalsIgnoreCase(path) 
-                ? Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName) 
-                : new FileInputStream(new File(path + fileSeparator + fileName))) {
-            log.warn("Looking for path:{} and file:{}", path, fileName);
+        InputStream istream = null;
+        try {
+            log.warn("Looking for path:" + path + " file:" + fileName);
             if (log.isDebugEnabled()) {
                 log.debug(
-                        "YOU CAN IGNORE THIS EXCEPTION: the purpose of this exception is to trace invocation"
-                                + " points of AhaConfigFactory",
+                        "YOU CAN IGNORE THIS EXCEPTION: the purpose of this exception is to trace "
+                        + "invocation points of AhaConfigFactory",
                         new RuntimeException("AhaConfigFactory invocation stack trace."));
             }
             String propertiesPath = null;
 
             if ("classpath".equalsIgnoreCase(path)) {
                 propertiesPath = fileName;
+                istream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
                 if (istream == null) {
                     if (mustExist) {
-                        log.error("Cannot find file with configuration properties in the classpath:{}", fileName);
+                        log.error("Cannot find file with configuration properties in the classpath:" + fileName);
                         throw new FileNotFoundException(fileName);
                     }
                     return props;
@@ -318,17 +324,26 @@ public class EnvConfigLoader<T extends Enum<T>> {
                 propertiesPath = file.toString();
                 if (!file.exists()) {
                     if (mustExist) {
-                        log.error("Cannot find file with configuration properties:{}", propertiesPath);
+                        log.error("Cannot find file with configuration properties:" + propertiesPath);
                         throw new FileNotFoundException(file.toString());
                     }
                     return props;
                 }
+                istream = new FileInputStream(file);
             }
-            log.warn("FILE FOUND loading: {}", propertiesPath);
+            log.warn("FILE FOUND loading: " + propertiesPath);
             props.load(istream);
             return props;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (istream != null) {
+                try {
+                    istream.close();
+                } catch (Exception ignore) {
+                    //do nothing
+                }
+            }
         }
     }
 }
