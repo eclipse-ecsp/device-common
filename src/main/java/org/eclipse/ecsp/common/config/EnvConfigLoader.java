@@ -300,7 +300,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
 
         InputStream istream = null;
         try {
-            log.warn("Looking for path:" + path + " file:" + fileName);
+            log.warn("Looking for path:{} and file:{}", path, fileName);
             if (log.isDebugEnabled()) {
                 log.debug(
                         "YOU CAN IGNORE THIS EXCEPTION: the purpose of this exception is to trace "
@@ -314,7 +314,7 @@ public class EnvConfigLoader<T extends Enum<T>> {
                 istream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
                 if (istream == null) {
                     if (mustExist) {
-                        log.error("Cannot find file with configuration properties in the classpath:" + fileName);
+                        log.error("Cannot find file with configuration properties in the classpath:{}", fileName);
                         throw new FileNotFoundException(fileName);
                     }
                     return props;
@@ -324,14 +324,14 @@ public class EnvConfigLoader<T extends Enum<T>> {
                 propertiesPath = file.toString();
                 if (!file.exists()) {
                     if (mustExist) {
-                        log.error("Cannot find file with configuration properties:" + propertiesPath);
+                        log.error("Cannot find file with configuration properties:{}", propertiesPath);
                         throw new FileNotFoundException(file.toString());
                     }
                     return props;
                 }
                 istream = new FileInputStream(file);
             }
-            log.warn("FILE FOUND loading: " + propertiesPath);
+            log.warn("FILE FOUND loading: {}", propertiesPath);
             props.load(istream);
             return props;
         } catch (Exception e) {
