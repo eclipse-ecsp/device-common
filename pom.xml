@@ -6,7 +6,7 @@
 
     <groupId>org.eclipse.ecsp</groupId>
     <artifactId>device-common</artifactId>
-    <version>0.1.2</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>device-common</name>
