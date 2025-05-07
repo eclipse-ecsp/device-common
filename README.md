@@ -53,7 +53,7 @@ To include the **Device Common Library** in your project, add the following depe
 <dependency>
     <groupId>org.eclipse.ecsp</groupId>
     <artifactId>device-common</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
