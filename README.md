@@ -1,9 +1,11 @@
-[<img src="./images/logo.png" width="300" height="150"/>](logo.png)
+<div align="center">
+  <img src="./images/logo.png" width="300" height="150"/>
+</div>
+
+# Device Common Library
 
 [![Build](../../actions/workflows/maven-build.yml/badge.svg)](../../actions/workflows/maven-build.yml)
 [![License Compliance](../../actions/workflows/license-compliance.yml/badge.svg)](../../actions/workflows/license-compliance.yml)
-
-# Device Common Library
 
 The **Device Common Library** is a shared component designed to provide reusable utilities, configurations, and functionalities for device-related projects. It simplifies the development of device management systems by offering pre-built modules and integrations for common tasks such as logging, configuration management, and data processing.
 
@@ -42,10 +44,29 @@ The **Device Common Library** can be used in projects that require:
 
 ### Prerequisites
 
-- **Java**: JDK 17 or higher.
-- **Maven**: Apache Maven 3.8 or higher.
+The list of tools required to build and run the project:
+   - Java 17
+   - Maven
 
 ### Installation
+
+[Install Java 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk#zulu)
+
+[How to set up Maven](https://maven.apache.org/install.html)
+
+### Coding style check configuration
+
+[checkstyle.xml](./checkstyle.xml) is the coding standard to follow while writing new/updating existing
+code.
+
+Checkstyle plugin [maven-checkstyle-plugin:3.2.1](https://maven.apache.org/plugins/maven-checkstyle-plugin/) is
+integrated in [pom.xml](./pom.xml) which runs in the `validate` phase and `check` goal of the maven lifecycle and fails
+the build if there are any checkstyle errors in the project.
+
+To run checkstyle plugin explicitly, run the following command:
+```mvn checkstyle:check```
+
+## Usage
 
 To include the **Device Common Library** in your project, add the following dependency to your `pom.xml`:
 
@@ -53,19 +74,9 @@ To include the **Device Common Library** in your project, add the following depe
 <dependency>
     <groupId>org.eclipse.ecsp</groupId>
     <artifactId>device-common</artifactId>
-    <version>0.1.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
-
-### Coding style check configuration
-
-[checkstyle.xml](./checkstyle.xml) is the coding standard to follow while writing new/updating existing code.
-
-Checkstyle plugin [maven-checkstyle-plugin:3.2.1](https://maven.apache.org/plugins/maven-checkstyle-plugin/) is integrated in [pom.xml](./pom.xml) which runs in the `validate` phase and `check` goal of the maven lifecycle and fails the build if there are any checkstyle errors in the project.
-
-There are a few coding guidelines to be followed manually before requesting for a pull request, the same can be found here:
-
-[Manual coding guidelines](Link to page with coding guidelines)
 
 ## How to contribute
 
@@ -86,7 +97,7 @@ Please read [SECURITY.md](./SECURITY.md) to raise any security related issues.
 
 ## Support
 
-Please write to us at [csp@harman.com](mailto:csp@harman.com)
+Contact the project developers via the project's "dev" list - [ecsp-dev](https://accounts.eclipse.org/mailing-list/)
 
 ## Troubleshooting
 
